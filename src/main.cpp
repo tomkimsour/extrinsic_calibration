@@ -30,27 +30,35 @@ int main(int argc, char **argv)
   uchar key_pressed;
   while(ros::ok())
   {
+    //std::cout << "1" << std::endl;
     ros::spinOnce();
 
+    //std::cout << "2" << std::endl;
     if ((key_pressed = cv::waitKey(10)) != -1)
     {
+      //std::cout << "3" << std::endl;
       /*if (key_pressed == 'r')
       {
         calib.saveImagePairs();
       }
       else*/ if (key_pressed == 's')
       {
+       //std::cout << "4" << std::endl;
         calib.saveImagePair();
       }
       else if (key_pressed == 'c')
       {
+        //std::cout << "5" << std::endl;
         calib.readAndProcessImages();
         ros::shutdown();
       }
+      //std::cout << "6" << std::endl;
     }
+    //std::cout << "7" << std::endl;
     rate.sleep();
   }
 
+  //std::cout << "8" << std::endl;
   ros::shutdown();
   return 0;
 }

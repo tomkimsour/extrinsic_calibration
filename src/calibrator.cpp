@@ -32,28 +32,24 @@ Calibrator::Calibrator():
   frames_[1] = "CameraDepth_optical_frame";
 
   cameras_[0].camera_calib_set.A = (cv::Mat_<double>(3, 3) <<
-                                    303.608524, 0.0, 164.350243,
-                                    0.0, 303.307367, 124.363650,
+                                    292.57376625926378, 0.0, 160.0,
+                                    0.0, 292.57376625926378, 120.0,
                                     0.0, 0.0, 1.0);
 
   cameras_[0].camera_calib_set.d = (cv::Mat_<double>(1, 5) <<
-                                    0.144703,
-                                    -0.394814,
-                                    0.003265,
-                                    0.001382,
-                                    0);
+                                    0.11923676649054793, 
+				    -0.83421566999148178,
+				    0.0,
+				    0.0,
+				    1.8310107541405036);
 
   cameras_[1].camera_calib_set.A = (cv::Mat_<double>(3, 3) <<
-                                    286.661252, 0.0, 174.414458,
-                                    0.0, 285.291921, 120.318757,
-                                    0.0, 0.0, 1.0);
+                                    286.415010, 0.000000, 157.949466,
+                                    0.000000, 287.139841, 127.271153,
+                                    0.000000, 0.000000, 1.000000);
 
   cameras_[1].camera_calib_set.d = (cv::Mat_<double>(1, 5) <<
-                                    -0.020129,
-                                    0.038371,
-                                    0.001638,
-                                    0.016381,
-                                    0);
+                                    0.018518, -0.196491, 0.000390, -0.004291, 0.000000);
 
   pose_estimator_.init(nbr_cameras_);
 
@@ -102,24 +98,38 @@ void Calibrator::processCameraInfo(const sensor_msgs::CameraInfoConstPtr& infoMs
 {
   frames_.at(cam_index) = infoMsg->header.frame_id;
 
-  if (cam_index < cameras_.size())
+  if (cam_index < cameras_.size()) {
     cameras_[cam_index].camera_calib_set.A = (cv::Mat_<double>(3, 3) <<
                        infoMsg->K[0], infoMsg->K[1], infoMsg->K[2],
                        infoMsg->K[3], infoMsg->K[4], infoMsg->K[5],
                        infoMsg->K[6], infoMsg->K[7], infoMsg->K[8]);
+    /*else { 
+      cameras_[cam_index].camera_calib_set.A = (cv::Mat_<double>(3, 3) <<
+                        286.415010, 0.000000, 157.949466, 0.000000, 287.139841,
+		 	127.271153, 0.000000, 0.000000, 1.000000);
+    }*/
+  }
 
-  if (cam_index < cameras_.size())
+
+  if (cam_index < cameras_.size()) {
     cameras_[cam_index].camera_calib_set.d = (cv::Mat_<double>(1, 5) <<
                         infoMsg->D[0],
                         infoMsg->D[1],
                         infoMsg->D[2],
                         infoMsg->D[3],
                         infoMsg->D[4]);
+   /*
+    else {
+      cameras_[cam_index].camera_calib_set.d = (cv::Mat_<double>(1, 5) <<
+                        0.018518, -0.196491, 0.000390, -0.004291, 0.000000);
+    }*/
+  }
 }
 
 void Calibrator::processRgbInfo(const sensor_msgs::CameraInfoConstPtr& infoMsg)
 {
-  processCameraInfo(infoMsg, 0);
+  //processCameraInfo(infoMsg, 0);
+  frames_.at(0) = infoMsg->header.frame_id;
 
   //unsubscribe from the topic
   sub_cam_rgb_info_.shutdown();
@@ -127,7 +137,8 @@ void Calibrator::processRgbInfo(const sensor_msgs::CameraInfoConstPtr& infoMsg)
 
 void Calibrator::processDepthInfo(const sensor_msgs::CameraInfoConstPtr& infoMsg)
 {
-  processCameraInfo(infoMsg, 1);
+  //processCameraInfo(infoMsg, 1);
+  frames_.at(1) = infoMsg->header.frame_id;
 
   //unsubscribe from the topic
   sub_cam_depth_info_.shutdown();
