@@ -148,8 +148,8 @@ float PoseEstimation::estimatePose(CameraCalibration& C1,
                                    C1.A, C1.d, C2.A, C2.d,
                                    image_pairs[0][0].size(),
                                    pose.R, pose.t, pose.E, pose.F,
-                                   cv::TermCriteria(cv::TermCriteria::COUNT+cv::TermCriteria::EPS, 100, DBL_EPSILON),
-                                   cv::CALIB_FIX_INTRINSIC);
+                                   cv::CALIB_FIX_INTRINSIC,
+                                   cv::TermCriteria(cv::TermCriteria::COUNT+cv::TermCriteria::EPS, 100, DBL_EPSILON));
 #endif
 
     return pose.rms;
