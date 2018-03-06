@@ -53,3 +53,19 @@ Once the calibration parameters are found, you can apply them using ROS static_t
 roslaunch naoqi_driver naoqi_driver.launch nao_ip:=<PEPPER_IP>
 roslaunch extrinsic_calibration register_depth.launch
 ```
+
+-------------------
+
+### Calibration Value for Pepper(ip 192.168.1.212)
+* for static_transform_publisher
+```
+x: 0.032
+y: -0.144
+z: 0.048
+Yaw: -0.0834208
+Pitch: -0.062641
+Roll: -0.0225045
+frame_id: CemeraDepth_optical_frame
+child_frame_id: CameraTop_optical_frame
+milliseconds: 1
+```
