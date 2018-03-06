@@ -1,7 +1,7 @@
 <launch>
   <!-- double x, double y, double z, double yaw, double pitch, double roll -->
   <node pkg="tf" name="depth_to_top_camera_frame_publisher" type="static_transform_publisher"
-        args="-0.0370708 0.042659 -0.0247341 -0.021496 -0.0410271 -0.0559322
+        args="0.032 -0.144 0.048 -0.0834208 -0.062641 -0.0225045
         CameraDepth_optical_frame CameraTop_optical_frame 1"/>
   
   <node pkg="image_proc" type="image_proc" name="rgb_processing" output="screen" ns="/pepper_robot/camera/front" />
