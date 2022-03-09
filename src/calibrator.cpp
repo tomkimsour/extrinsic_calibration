@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/highgui/highgui_c.h>
 
 #include "dirent.h"
 
@@ -545,13 +546,13 @@ bool Calibrator::readImage(const std::string &file_name,
   //initialize if needed
   if (image->empty())
   {
-    cv::Mat image_temp = cv::imread(file_name, CV_LOAD_IMAGE_GRAYSCALE);
+    cv::Mat image_temp = cv::imread(file_name, cv::IMREAD_GRAYSCALE);
     if(image_temp.empty())
       return false;
     image->create(cv::Size(image_temp.rows, image_temp.cols), CV_8UC1);
   }
 
-  *image = cv::imread(file_name, CV_LOAD_IMAGE_GRAYSCALE);
+  *image = cv::imread(file_name, cv::IMREAD_GRAYSCALE);
   if(image->empty())
     return false;
 

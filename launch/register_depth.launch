@@ -1,27 +1,28 @@
 <launch>
   <!-- double x, double y, double z, double yaw, double pitch, double roll -->
+        <!-- args="0.032 -0.144 0.048 -0.0834208 -0.062641 -0.0225045 -->
   <node pkg="tf" name="depth_to_top_camera_frame_publisher" type="static_transform_publisher"
-        args="0.032 -0.144 0.048 -0.0834208 -0.062641 -0.0225045
+        args="0.057781 0.0218576 0.168606 -1.53874 -0.0240197 -1.47096
         CameraDepth_optical_frame CameraTop_optical_frame 1"/>
   
-  <node pkg="image_proc" type="image_proc" name="rgb_processing" output="screen" ns="/pepper_robot/camera/front" />
+  <node pkg="image_proc" type="image_proc" name="rgb_processing" output="screen" ns="/naoqi_driver/camera/front" />
 
   <node pkg="nodelet" type="nodelet" name="register_depth" output="screen"
         args="standalone depth_image_proc/register" >
-    <remap from="rgb/camera_info" to="/pepper_robot/camera/front/camera_info"/>
-    <remap from="depth/camera_info" to="/pepper_robot/camera/depth/camera_info"/>
-    <remap from="depth/image_rect" to="/pepper_robot/camera/depth/image_raw"/>
-    <remap from="depth_registered/camera_info" to="/pepper_robot/camera/depth_registered/camera_info"/>
-    <remap from="depth_registered/image_rect" to="/pepper_robot/camera/depth_registered/image_rect"/>
+    <remap from="rgb/camera_info" to="/naoqi_driver/camera/front/camera_info"/>
+    <remap from="depth/camera_info" to="/naoqi_driver/camera/depth/camera_info"/>
+    <remap from="depth/image_rect" to="/naoqi_driver/camera/depth/image_raw"/>
+    <remap from="depth_registered/camera_info" to="/naoqi_driver/camera/depth_registered/camera_info"/>
+    <remap from="depth_registered/image_rect" to="/naoqi_driver/camera/depth_registered/image_rect"/>
   </node>
 
-  <node pkg="nodelet" type="nodelet" name="cloudify" output="screen"
+  <!-- <node pkg="nodelet" type="nodelet" name="cloudify" output="screen"
         args="standalone depth_image_proc/point_cloud_xyzrgb" >
-    <remap from="rgb/camera_info" to="/pepper_robot/camera/front/camera_info"/>
-    <remap from="rgb/image_rect_color" to="/pepper_robot/camera/front/image_rect_color"/>
-    <remap from="depth_registered/image_rect" to="/pepper_robot/camera/depth_registered/image_rect"/>
-    <remap from="depth_registered/points" to="/pepper_robot/camera/depth_registered/points"/>
-  </node>
+    <remap from="rgb/camera_info" to="/naoqi_driver/camera/front/camera_info"/>
+    <remap from="rgb/image_rect_color" to="/naoqi_driver/camera/front/image_rect_color"/>
+    <remap from="depth_registered/image_rect" to="/naoqi_driver/camera/depth_registered/image_rect"/>
+    <remap from="depth_registered/points" to="/naoqi_driver/camera/depth_registered/points"/>
+  </node> -->
 </launch>
 
 

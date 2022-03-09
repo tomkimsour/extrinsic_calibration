@@ -1,5 +1,5 @@
 #include "pose_estimation.hpp"
-
+#include <opencv2/highgui/highgui_c.h>
 //Include basic headers
 #include <iostream>
 #include <ctime>
@@ -29,7 +29,7 @@ bool PoseEstimation::checkCheckerboardPoints(cv::Mat &image)
   bool found_checker_cl = cv::findChessboardCorners(image,
                                                     pattern_size_,
                                                     imagePoints,
-                                                    CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FILTER_QUADS + cv::CALIB_CB_FAST_CHECK);
+                                                    cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_FILTER_QUADS + cv::CALIB_CB_FAST_CHECK);
 
   //draw points
   if (image.channels() == 1)
@@ -51,7 +51,7 @@ bool getCheckerboardPoints(cv::Mat &image,
   bool found_checker_cl = cv::findChessboardCorners(image,
                                                     pattern_size,
                                                     imagePoints,
-                                                    CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FILTER_QUADS + cv::CALIB_CB_FAST_CHECK);
+                                                    cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_FILTER_QUADS + cv::CALIB_CB_FAST_CHECK);
 
   if (found_checker_cl)
   {
