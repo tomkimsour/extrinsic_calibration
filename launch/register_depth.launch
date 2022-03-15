@@ -16,13 +16,13 @@
     <remap from="depth_registered/image_rect" to="/naoqi_driver/camera/depth_registered/image_rect"/>
   </node>
 
-  <!-- <node pkg="nodelet" type="nodelet" name="cloudify" output="screen"
+  <node pkg="nodelet" type="nodelet" name="cloudify" output="screen"
         args="standalone depth_image_proc/point_cloud_xyzrgb" >
     <remap from="rgb/camera_info" to="/naoqi_driver/camera/front/camera_info"/>
     <remap from="rgb/image_rect_color" to="/naoqi_driver/camera/front/image_rect_color"/>
     <remap from="depth_registered/image_rect" to="/naoqi_driver/camera/depth_registered/image_rect"/>
     <remap from="depth_registered/points" to="/naoqi_driver/camera/depth_registered/points"/>
-  </node> -->
+  </node>
 </launch>
 
 
